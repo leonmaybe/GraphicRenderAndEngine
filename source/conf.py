@@ -52,7 +52,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Tango Devleopment Book'
+project = u'Graphic reander and engine'
 copyright = u'2015, vl'
 
 # The version info for the project you're documenting, acts as replacement for
