@@ -44,6 +44,7 @@ http://openglinsights.com/pipeline.html
 
 openGL
 ======
+
 *OpenGL pipeLIne*
 .. graphic::
 
@@ -78,9 +79,9 @@ glUniformli 来设置传递参数的。
 #. `PBO的用法 <http://blog.sina.com.cn/s/blog&#95;4062094e0100alvt.html>`_  原来只是为了数据传输的方便
 #. `glUseProgram <http://blog.beuc.net/posts/Multiple&#95;glUseProgram/>`_  这个相当于回调函数。
 
-opengl只提供最基本的功能，例如图元，变型，纹理，光照，雾照等基本东西，如何去用以及建立更一层，例如软体等等，以及各种物理模型都是需要你自己建或者利用其上层库来做的。
+opengl只提供最基本的功能，例如图元，变型，纹理，光照，雾照等基本东西，如何去用以及建立更上一层，例如软体等等，以及各种物理模型都是需要你自己建或者利用其上层库来做的。
 在光栅化之前都是顶点与图元的操作，即使有计算光照以及FOG以及法线信息，都是只有顶点的。因为在此之前，你不知道其内部具体要有多少个点来组成，也只有当其进行了光栅化之后，这些点才变成可数的了。 并且在光栅化之前这些顶点不会发生质变。当然你可以直接传现成已经光栅化后块过来。opengl也是支持的，那是texture是在光栅化之前还是之后，按道理应该是之后吧。
-实现上，主要是GPU与计算机的CPU之间来进行实现。显卡连接显示器。而opengl而是实现那些资源管理并且GPU进行交互接口的一个良好实现。但是要想充分学好opengl首先要弄明白CPU与GPU的通信机制。内存操作与显存操作的有关系。openGL定义一些标准API下面有各个不同的实现方式。它是计算机图形在实践上一种最佳模式的总结。有了它，再不是以前的单打独到了。有了这样一个common的平台。同时它又是在Xwindows之上的东西。`theory to Experiment <这里是自算机图形的发展史][有助于理解各种应用来源]] [[http://www.sumantaguha.com/>`_ ，但是OPENGL的每一条命令要求都是在前面一条执行完才能执行。这样就会有一个问题，不相关的部分，为什么不能
+实现上，主要是GPU与计算机的CPU之间来进行实现。显卡连接显示器。而opengl而是实现那些资源管理并且GPU进行交互接口的一个良好实现。但是要想充分学好opengl首先要弄明白CPU与GPU的通信机制。内存操作与显存操作的有关系。openGL定义一些标准API下面有各个不同的实现方式。它是计算机图形在实践上一种最佳模式的总结。有了它，再不是以前的单打独到了。有了这样一个common的平台。同时它又是在Xwindows之上的东西。 `theory to Experiment <http://www.sumantaguha.com/>`_ 这里是自算机图形的发展史有助于理解各种应用来源 ，但是OPENGL的每一条命令要求都是在前面一条执行完才能执行。这样就会有一个问题，不相关的部分，为什么不能
 
 并且framebuffer的分配，是在初始化的时候与XWindows相关的配置是一块的。gl 本身只关心画图。并且由于采用的C/S并且也像X Windows那样透明化，所以对于上层应用程序来说应该感觉不到，所以通常所指的大部分状态都应该是GL server state.
 
@@ -113,7 +114,7 @@ opengl 的工作流程
 
 BEGIN/END  有点像GIMP中的路径，不同之处在于路径只能是轮廓。但是如果opengl用轮廓+texture就与GIMP中路径中加贴图是一样的了。并且BEGIN/END之间的操作也是有规定的，哪些可以，哪些不可以。
 
-对于在曲面或曲线的点，各种方向与特征都是与其法线作为参照的。只要知道了法线，其他的东西都可以基于来计算，所以在opengl中也每一个顶点的信息都会有其法线的信息。在光栅化之前的操作，一切都是坐标基础的，而光栅化之后，坐标就变的不那么重要了。而是颜色等等变的重要了。
+对于在曲面或曲线的点，各种方向与特征都是与其法线作为参照的。只要知道了法线，其他的东西都可以基于此来计算，所以在opengl中也每一个顶点的信息都会有其法线的信息。在光栅化之前的操作，一切都是坐标基础的，而光栅化之后，坐标就变的不那么重要了。而是颜色等等变的重要了。
 
 如果需要变型，这些东西都应该是怎么样顺序呢，它们之间是有演化关系，还是说从下面实现来说，都是每一次重新开始化的。没有什么前后关系。
 
@@ -138,7 +139,7 @@ BufferObjects 其实就是CUDA中提到的，分配设备中的内存。不同�
 *Evaluator* 例如Map1,Map2,EvalCoord提供一些更加通过算法实现，例如多项式，你需要只提供参数。这样大大减少了你的编程压力。 以及DisplayList,NewList/ENDList/CallList.为了提高速度，直接Vertex<VertexArray<VBO<DisplayList.
 http://www.ciroduran.com/disenajuegos/wp-content/uploads/downloads/2012/05/ParametricOpenGL_2pp.pdf
 
-分数多多式http://www.math.dartmouth.edu/opencalc2/cole/lecture19.pdf.
+分数多多式 http://www.math.dartmouth.edu/opencalc2/cole/lecture19.pdf.
 
 
 Color,Pixels,AndFramebuffers
@@ -160,8 +161,8 @@ VBO,FBO,PBO,texture
 
 其实只要明白了这个pipeline,明白这几个对象操作哪一段存储空间，以及信号的流图。
 
-#. `缓冲区与混合 <http://baike.baidu.com/view/1280561.htm][glclear]], [[http://wenku.baidu.com/view/b8ca5e84ec3a87c24028c4cd.html>`_  opengl也采用缓冲区的办法，就像GIMP中图层与通道一样，例如背景不必每一次重写，只需要用硬件在显示的时候，直接合成就行了。多个缓冲的模式与图层混合的模式是一样的
-#. ` OpenGL Frame Buffer Object (FBO)  <http://blog.chinaunix.net/uid-20235103-id-2976141.html>`_ 
+#. `glclear <http://baike.baidu.com/view/1280561.htm>`_ , `缓冲区与混合 <http://wenku.baidu.com/view/b8ca5e84ec3a87c24028c4cd.html>`_  opengl也采用缓冲区的办法，就像GIMP中图层与通道一样，例如背景不必每一次重写，只需要用硬件在显示的时候，直接合成就行了。多个缓冲的模式与图层混合的模式是一样的
+#. `OpenGL Frame Buffer Object (FBO)  <http://blog.chinaunix.net/uid-20235103-id-2976141.html>`_ 
 #. `OpenGL Pixel Buffer Object (PBO) <http://www.songho.ca/opengl/gl_pbo.html>`_ 
 这一章主要是讲了，opengl有几个队列，但是我感觉这一张讲的不好，因为并没有讲清楚，这一张的意义，并且前后关系都没有讲清楚。  不过还是讲了不少东东的。
 为了提高移值性，与精确性，在opengl尽可能的采用浮点数，一般都采用归一化，这样的例如颜色，可能没有最精确的，只有最接近的。并讲了各种各样的缓冲区，每一种缓冲区的用途。并且如果opengl支持立体的，还要左右buffer,指的是左右眼是两个buffer,nvidia的3D眼镜就是不断的切换左右眼的图像来达到3D的效果。|
@@ -207,6 +208,7 @@ http://wenku.baidu.com/view/8cdc52c14028915f804dc2ef.html
 
 openGL issue study
 ==================
+
 .. csv-table::
     
     0 , https://devtalk.nvidia.com/default/topic/541643/tegra-tools/glcompressedteximage2d/ , study it , new , :-) , 29 Apr 2013 06:55 ,
@@ -231,66 +233,68 @@ standford course
 =================
 
 `opengl <http://graphics.stanford.edu/courses/cs248-07/>`_  这里把这个整个流程讲的很明白
-   * `standford  lecuture for opengl <http://www.stanford.edu/class/cs148/lectures.html>`_  %IF{" '' = '' " then="" else="- "}%
+   * `standford  lecuture for opengl <http://www.stanford.edu/class/cs148/lectures.html>`_  
 
 
 bindless texture
 ================
+
 对比着CUDA来看ogl,现在发现其原来也很简单，就是一个优化pipeline,你要事先把所有的东东都准备好，然后用drawXXX来trigger, 并且trigger一次，都bind一堆的东东，清场一回。并且这种bind在很大程度是没有意义的，只是接口的规范性。而在实际的操作过程实际这些bind操作大大限制效率，因为它破坏了cache的使用，这个是完全与cache背道而弛的。所以为了提高效率，NV提出了自己的bindless机制，这可以就以充分利用cache来提高效率。 利用cache是隐式的优化方式，与简单的只看代码是看不出来的。具体更高的内容要查看`nv bindless`的使用。 
 
 
 
 See also
 ========
-   * `OpenGL编程指南 <http://wenku.baidu.com/view/1a08a11fc281e53a5802ff59.html>`_  平行投影与透视投影。透视投影原理就像相机一样把三维转化到二维。同时也要利用齐次坐标系。
-   * `最全的AndroidOpenGL开发文档 <http://wenku.baidu.com/view/b2fb07f3f61fb7360b4c6547.html>`_  %IF{" '' = '' " then="" else="- "}%
-   * `水效果Ⅰ - 水池 <http://www.zwqxin.com/archives/opengl/water-simulation-1.html>`_  %IF{" '' = '' " then="" else="- "}%
-   * `显示列表 <http://bbs.pfan.cn/post-219518.html>`_  %IF{" '就像一个宏录制的功能，不过，是有条件限制的' = '' " then="" else="- "}%就像一个宏录制的功能，不过，是有条件限制的
-   * `用opengl-es画图步骤 <http://hi.baidu.com/gmfoqlmthriprur/item/8c5058577e559c464fff2030>`_  %IF{" '' = '' " then="" else="- "}%
-   * `when-to-use-glActiveTexture <http://www.opengl.org/discussion&#95;boards/showthread.php/174926-when-to-use-glActiveTexture>`_  %IF{" '' = '' " then="" else="- "}%
-   * `GLFW is a free, Open Source, multi-platform library for opening a window, creating an OpenGL context and managing input. It is easy to integrate into existing applications and does not lay claim to the main loop.  GLFW is written in C and has native support for Windows, Mac OS X and many Unix-like systems using the X Window System, such as Linux and FreeBSD. <http://www.glfw.org/>`_  %IF{" '' = '' " then="" else="- "}%
-   * `A Framework for Dynamic Deformation of Uniform Elastic Two-Layer 2D and 3D Objects in OpenGL <http://delivery.acm.org/10.1145/1380000/1370282/p145-song.pdf?ip&#61;203.18.50.4&#38;acc&#61;ACTIVE&#37;20SERVICE&#38;CFID&#61;278622627&#38;CFTOKEN&#61;15147707&#38;&#95;&#95;acm&#95;&#95;&#61;1361277579&#95;4b1a96414b5cc49cd8dbec7418a5e96e>`_  看看这篇文章。开始了解图像处理现状。
-   * `A Framework for an R to OpenGL Interface for Interactive 3D graphics <http://www.statoek.wiso.uni-goettingen.de/mitarbeiter/ogi/pub/DSC03&#95;RGL.pdf>`_  %IF{" '' = '' " then="" else="- "}%
-   * `OpenGL Graphics   in the   Computer Systems Lab <http://www.tjhsst.edu/~dhyatt/superap/opengl.html>`_  %IF{" '' = '' " then="" else="- "}%
-   * `OpenGL浅谈 <http://wenku.baidu.com/view/4426e177a417866fb84a8e0b.html>`_  %IF{" 'Opengl入门、浅谈、渲染流水隐喻' = '' " then="" else="- "}%Opengl入门、浅谈、渲染流水隐喻
-   * `openGL 的坐标变换 <http://wenku.baidu.com/view/1c3e4a7d27284b73f2425012.html>`_  %IF{" 'openGL 中重要内容之一，要深入研究' = '' " then="" else="- "}%openGL 中重要内容之一，要深入研究
-   * `Tiled Map eidtor <http://www.mapeditor.org/>`_  %IF{" '地图制作工具' = '' " then="" else="- "}%地图制作工具
-   * `openGL 与GPU的关系 <http://www.builder.com.cn/2008/0703/963021.shtml>`_  %IF{" '' = '' " then="" else="- "}%
-   * `openGL 变换数学原理与接口指南 <http://wenku.baidu.com/view/455ed4db76eeaeaad1f330ae.html>`_  %IF{" '' = '' " then="" else="- "}%
-   * `显存的前世今生(终极剖析 高手阶进必知) <http://wenku.baidu.com/view/d4ce780f76c66137ee061938.html>`_  %IF{" '' = '' " then="" else="- "}%
-   * `CPU显存控制 <http://wenku.baidu.com/view/026a5d7202768e9951e7386d.html>`_  %IF{" '' = '' " then="" else="- "}%
-   * `PhysX技术?  游戏物理效果 <http://www.nvidia.cn/object/physx&#95;faq&#95;cn.html>`_  %IF{" '' = '' " then="" else="- "}%
-   * `Unity 3D <http://game.ceeger.com/>`_  %IF{" '' = '' " then="" else="- "}%
 
-   * `用PyOpenGL叩开3D的心扉——OpenGL全解析 <http://eyehere.net/2011/learn-opengl-3d-by-pyopengl-1/>`_  %IF{" '' = '' " then="" else="- "}%
-   * `OpenGLContext Python tutorials <http://pyopengl.sourceforge.net/context/tutorials/shader&#95;intro.xhtml>`_  %IF{" 'need virutalen study first' = '' " then="" else="- "}%need virutalen study first
-   * `glTexGend, glTexGenf, glTexGeni, glTexGendv, glTexGenfv, glTexGeniv <http://msdn.microsoft.com/zh-cn/library/ms537230(v&#61;VS.85).aspx>`_  %IF{" 'MSDN' = '' " then="" else="- "}%MSDN
-   * `回顾图形学课程来对照各个函数 <http://blog.csdn.net/wu4long/article/details/6126408>`_  %IF{" '' = '' " then="" else="- "}%
-   * `GL学习笔记(2) - 终于搞明白gluPerspective和gluLookAt的关系了 <http://hi.baidu.com/korndorben/item/76c5020453f18212cc34ea90>`_  %IF{" '' = '' " then="" else="- "}%
-   * `GLFW is a free, Open Source, multi-platform library for opening a window, creating an OpenGL context and managing input. <http://www.glfw.org/faq.html>`_  %IF{" '' = '' " then="" else="- "}%
-   * `OCC是一个免费、开源的二维和三维建模引擎SDK（遵循LGPL开源协议）。适合开发CAD/CAE/CAM程序 <http://www.cppblog.com/mythma/archive/2009/05/26/85770.html>`_  %IF{" '' = '' " then="" else="- "}%
-   * `The People Behind Mesa 3D <http://www.phoronix.com/scan.php?page&#61;article&#38;item&#61;mesa&#95;contributors&#38;num&#61;1>`_  %IF{" '' = '' " then="" else="- "}%
-   * `OpenGL点阵字体绘制终极解决方案!  <http://blog.csdn.net/wm111/article/details/7665755>`_  %IF{" '' = '' " then="" else="- "}%
-   * `appletparadise <http://appletparadise.com/>`_  %IF{" '' = '' " then="" else="- "}%
-   * `opengl 的矩阵变换 <http://caobeixingqiu.is-programmer.com/posts/16488.html>`_  %IF{" '' = '' " then="" else="- "}%
-   * `glew <http://glew.sourceforge.net/>`_  %IF{" ' is a cross-platform open-source C/C++ extension loading library. GLEW provides efficient run-time mechanisms for determining which OpenGL extensions are supported on the target platform. ' = '' " then="" else="- "}% is a cross-platform open-source C/C++ extension loading library. GLEW provides efficient run-time mechanisms for determining which OpenGL extensions are supported on the target platform. 
-   * `很好的视频教程 <http://www.videotutorialsrock.com/opengl&#95;tutorial/color/video.php>`_  %IF{" '' = '' " then="" else="- "}%
-   * `Cg vs cuda <https://docs.google.com/viewer?url&#61;http://elrond.informatik.tu-freiberg.de/papers/WorldComp2012/PDP2936.pdf>`_  %IF{" '' = '' " then="" else="- "}%
+   * `OpenGL编程指南 <http://wenku.baidu.com/view/1a08a11fc281e53a5802ff59.html>`_  平行投影与透视投影。透视投影原理就像相机一样把三维转化到二维。同时也要利用齐次坐标系。
+   * `最全的AndroidOpenGL开发文档 <http://wenku.baidu.com/view/b2fb07f3f61fb7360b4c6547.html>`_  
+   * `水效果Ⅰ - 水池 <http://www.zwqxin.com/archives/opengl/water-simulation-1.html>`_  
+   * `显示列表 <http://bbs.pfan.cn/post-219518.html>`_  就像一个宏录制的功能，不过，是有条件限制的
+   * `用opengl-es画图步骤 <http://hi.baidu.com/gmfoqlmthriprur/item/8c5058577e559c464fff2030>`_  
+   * `when-to-use-glActiveTexture <http://www.opengl.org/discussion&#95;boards/showthread.php/174926-when-to-use-glActiveTexture>`_  
+   * `GLFW is a free, Open Source, multi-platform library for opening a window, creating an OpenGL context and managing input. It is easy to integrate into existing applications and does not lay claim to the main loop.  GLFW is written in C and has native support for Windows, Mac OS X and many Unix-like systems using the X Window System, such as Linux and FreeBSD. <http://www.glfw.org/>`_  
+   * `A Framework for Dynamic Deformation of Uniform Elastic Two-Layer 2D and 3D Objects in OpenGL <http://delivery.acm.org/10.1145/1380000/1370282/p145-song.pdf?ip&#61;203.18.50.4&#38;acc&#61;ACTIVE&#37;20SERVICE&#38;CFID&#61;278622627&#38;CFTOKEN&#61;15147707&#38;&#95;&#95;acm&#95;&#95;&#61;1361277579&#95;4b1a96414b5cc49cd8dbec7418a5e96e>`_  看看这篇文章。开始了解图像处理现状。
+   * `A Framework for an R to OpenGL Interface for Interactive 3D graphics <http://www.statoek.wiso.uni-goettingen.de/mitarbeiter/ogi/pub/DSC03&#95;RGL.pdf>`_  
+   * `OpenGL Graphics   in the   Computer Systems Lab <http://www.tjhsst.edu/~dhyatt/superap/opengl.html>`_  
+   * `OpenGL浅谈 <http://wenku.baidu.com/view/4426e177a417866fb84a8e0b.html>`_  Opengl入门、浅谈、渲染流水隐喻
+   * `openGL 的坐标变换 <http://wenku.baidu.com/view/1c3e4a7d27284b73f2425012.html>`_  openGL 中重要内容之一，要深入研究
+   * `Tiled Map eidtor <http://www.mapeditor.org/>`_  地图制作工具
+   * `openGL 与GPU的关系 <http://www.builder.com.cn/2008/0703/963021.shtml>`_  
+   * `openGL 变换数学原理与接口指南 <http://wenku.baidu.com/view/455ed4db76eeaeaad1f330ae.html>`_  
+   * `显存的前世今生(终极剖析 高手阶进必知) <http://wenku.baidu.com/view/d4ce780f76c66137ee061938.html>`_  
+   * `CPU显存控制 <http://wenku.baidu.com/view/026a5d7202768e9951e7386d.html>`_  
+   * `PhysX技术?  游戏物理效果 <http://www.nvidia.cn/object/physx&#95;faq&#95;cn.html>`_  
+   * `Unity 3D <http://game.ceeger.com/>`_  
+
+   * `用PyOpenGL叩开3D的心扉——OpenGL全解析 <http://eyehere.net/2011/learn-opengl-3d-by-pyopengl-1/>`_  
+   * `OpenGLContext Python tutorials <http://pyopengl.sourceforge.net/context/tutorials/shader&#95;intro.xhtml>`_  need virutalen study first
+   * `glTexGend, glTexGenf, glTexGeni, glTexGendv, glTexGenfv, glTexGeniv <http://msdn.microsoft.com/zh-cn/library/ms537230(v&#61;VS.85).aspx>`_  MSDN
+   * `回顾图形学课程来对照各个函数 <http://blog.csdn.net/wu4long/article/details/6126408>`_  
+   * `GL学习笔记(2) - 终于搞明白gluPerspective和gluLookAt的关系了 <http://hi.baidu.com/korndorben/item/76c5020453f18212cc34ea90>`_  
+   * `GLFW is a free, Open Source, multi-platform library for opening a window, creating an OpenGL context and managing input. <http://www.glfw.org/faq.html>`_  
+   * `OCC是一个免费、开源的二维和三维建模引擎SDK（遵循LGPL开源协议）。适合开发CAD/CAE/CAM程序 <http://www.cppblog.com/mythma/archive/2009/05/26/85770.html>`_  
+   * `The People Behind Mesa 3D <http://www.phoronix.com/scan.php?page&#61;article&#38;item&#61;mesa&#95;contributors&#38;num&#61;1>`_  
+   * `OpenGL点阵字体绘制终极解决方案!  <http://blog.csdn.net/wm111/article/details/7665755>`_  
+   * `appletparadise <http://appletparadise.com/>`_  
+   * `opengl 的矩阵变换 <http://caobeixingqiu.is-programmer.com/posts/16488.html>`_  
+   * `glew <http://glew.sourceforge.net/>`_   is a cross-platform open-source C/C++ extension loading library. GLEW provides efficient run-time mechanisms for determining which OpenGL extensions are supported on the target platform. 
+   * `很好的视频教程 <http://www.videotutorialsrock.com/opengl&#95;tutorial/color/video.php>`_  
+   * `Cg vs cuda <https://docs.google.com/viewer?url&#61;http://elrond.informatik.tu-freiberg.de/papers/WorldComp2012/PDP2936.pdf>`_  
    * `HDR渲染器的实现(基于OpenGL) <http://dev.gameres.com/Program/Visual/3D/HDRTutorial/HDRTutorial.htm>`_  http://www.openexr.com/ openEXR 这个是HDR的标准格式。
-   * `这上面的技术一个一个去试去学 <https://wiki.nvidia.com/engwiki/index.php/Devtech/Android#Releasing.2C&#95;Branches&#95;and&#95;Labels>`_  %IF{" '' = '' " then="" else="- "}%
-   * `graphicall   一个比较全的网站 <http://www.graphicall.org/>`_  %IF{" '' = '' " then="" else="- "}%
-   * `YafaRay is a free open-source raytracing engine. <http://www.yafaray.org/>`_  %IF{" '' = '' " then="" else="- "}%
-   * `pyopengl <http://pyopengl.sourceforge.net/>`_  %IF{" '' = '' " then="" else="- "}%
-   * `jet game <http://jet.ro/>`_  %IF{" '' = '' " then="" else="- "}%
-   * `红宝书的例子 <http://www.opengl-redbook.com/>`_  %IF{" '' = '' " then="" else="- "}%
-   * `Instanced Rendering <http://ogldev.atspace.co.uk/www/tutorial33/tutorial33.html>`_  %IF{" '这个这两天要看一下' = '' " then="" else="- "}%这个这两天要看一下
-   * `Xgl <http://zh.wikipedia.org/wiki/Xgl>`_  %IF{" '3d 桌面' = '' " then="" else="- "}%3d 桌面
-   * `opengl FAQ <http://www.opengl.org/archives/resources/faq/technical/texture.htm#text0010>`_  %IF{" '' = '' " then="" else="- "}%
-   * `where-is-glswapbuffers-defined <http://stackoverflow.com/questions/15753840/where-is-glswapbuffers-defined>`_  %IF{" '这个是不是由ogl来定义的，而是framework自己定义的。' = '' " then="" else="- "}%这个是不是由ogl来定义的，而是framework自己定义的。
-   * `opengl中VAO,VBO,IBO用法小结 <http://www.cnblogs.com/eggine/archive/2012/12/07/2807245.html>`_  %IF{" '' = '' " then="" else="- "}%
-   * `opengl Momory Model <https://www.opengl.org/wiki/Memory&#95;Model>`_  %IF{" '' = '' " then="" else="- "}%
-   * `opengl api manual <http://www.opengl.org/sdk/docs/man/>`_  %IF{" '' = '' " then="" else="- "}%
-   * `AB是一家?VAO与VBO <http://www.zwqxin.com/archives/opengl/vao-and-vbo-stuff.html>`_  %IF{" '这个总结一下' = '' " then="" else="- "}%这个总结一下
+   * `这上面的技术一个一个去试去学 <https://wiki.nvidia.com/engwiki/index.php/Devtech/Android#Releasing.2C&#95;Branches&#95;and&#95;Labels>`_  
+   * `graphicall   一个比较全的网站 <http://www.graphicall.org/>`_  
+   * `YafaRay is a free open-source raytracing engine. <http://www.yafaray.org/>`_  
+   * `pyopengl <http://pyopengl.sourceforge.net/>`_  
+   * `jet game <http://jet.ro/>`_  
+   * `红宝书的例子 <http://www.opengl-redbook.com/>`_  
+   * `Instanced Rendering <http://ogldev.atspace.co.uk/www/tutorial33/tutorial33.html>`_  这个这两天要看一下
+   * `Xgl <http://zh.wikipedia.org/wiki/Xgl>`_  3d 桌面
+   * `opengl FAQ <http://www.opengl.org/archives/resources/faq/technical/texture.htm#text0010>`_  
+   * `where-is-glswapbuffers-defined <http://stackoverflow.com/questions/15753840/where-is-glswapbuffers-defined>`_  这个是不是由ogl来定义的，而是framework自己定义的。
+   * `opengl中VAO,VBO,IBO用法小结 <http://www.cnblogs.com/eggine/archive/2012/12/07/2807245.html>`_  
+   * `opengl Momory Model <https://www.opengl.org/wiki/Memory&#95;Model>`_  
+   * `opengl api manual <http://www.opengl.org/sdk/docs/man/>`_  
+   * `AB是一家?VAO与VBO <http://www.zwqxin.com/archives/opengl/vao-and-vbo-stuff.html>`_  这个总结一下
 
 
 Thinking
@@ -298,8 +302,6 @@ Thinking
 
 
 openGL 的图元是利用有序的顶点来进行描述的。并且用BEGIN与END来进行标识。 并且核心库只有115个函数，并且只有能处理点，线，多边形。一般情况下，都采用三角形来模拟各种图形。
-
--- Main.GangweiLi - 19 Feb 2013
 
 
 
@@ -322,6 +324,7 @@ openGL 的图元是利用有序的顶点来进行描述的。并且用BEGIN与EN
 
 
 http://bbs.csdn.net/topics/330163685
+
 .. code:: cpp
 
     #include "GL/glut.h"
@@ -506,7 +509,7 @@ OpenGL扩展往往都会新增一些函数，在Windows平台上，这些函数�
 
 
 
-*SwapBuffer* 操作系统自身的功能，只有此时还会更新屏幕。
+*SwapBuffer*  操作系统自身的功能，只有此时还会更新屏幕。
 
 -- Main.GangweiLi - 03 Mar 2014
 
@@ -514,6 +517,7 @@ OpenGL扩展往往都会新增一些函数，在Windows平台上，这些函数�
 glDrawXXX的数据也是可以直接放在内存中，利用glVertexAttribPointer 直接来指定其格式的。在用的时候在往显存传送，所以经常会到一些简单的glDrawXXX会直接使用内存端的数据，特别是画一个对角四边形来触发opengl 来执行。
 
 .. code:: cpp
+
         checkGlError("glUniformMatrix4fv", "drawSkyBox()");
 
 	const float skyQuadCoords[] = {	-1.0f, -1.0f, -1.0f, 1.0f,
