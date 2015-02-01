@@ -34,8 +34,8 @@ MojoShader
 #. `MojoShader <https://icculus.org/mojoshader/>`_  cross platform tools physX and apex use it.
   phsyx 使用MojoShader 来做编译器，可以其代码树中看到它，并且它的语法分析是用re2c 来生成的。
 
-+调用约定：
-================
+调用约定：
+==========
 
 #. 函数入口点。
 #. 输出与输入参数。 
@@ -54,11 +54,11 @@ MojoShader
    buffer , shader storage buffer ,share with app ,
    share , 
 
- #. uniform 在每一次glinkProgram时生成参数的位置，或者使用uniform Blocks 来独立传递，这是使用buffer in GPU, 这时候读取其就要采用glGetMapBuffer, glBindBuffer来设置buffer类型为GL_UNIFORM_BUFFER，glBufferData来批量设置数据，或者使用glGetActiveUniformBlockiv/glBindBufferRange/glBindBufferBase/glUniformBlockBinding. 所有的调整都需要自己根据字节去计算了。
- #. in 的参数是在gllinkProgram之前，uniform是在gllinkProgram之后，先get/glunif*()
+#. uniform 在每一次glinkProgram时生成参数的位置，或者使用uniform Blocks 来独立传递，这是使用buffer in GPU, 这时候读取其就要采用glGetMapBuffer, glBindBuffer来设置buffer类型为GL_UNIFORM_BUFFER，glBufferData来批量设置数据，或者使用glGetActiveUniformBlockiv/glBindBufferRange/glBindBufferBase/glUniformBlockBinding. 所有的调整都需要自己根据字节去计算了。
+#. in 的参数是在gllinkProgram之前，uniform是在gllinkProgram之后，先get/glunif*()
 
-++ 具有前后依赖的参数如何解决：
-=============================================
+具有前后依赖的参数如何解决
+==========================
 
 
 这个依赖interfaceBlocks 来解决各个pipline stage的数据传递。那么在哪定义这些传递数据格式呢。  你把自定义的数据顶点数据格式放在GPU的Buffer之中，其数据格式是通过glVertexAttribPointer来指定的,然后，glDisable/enableVertexAttribArray来设置传哪些，哪些不传，再后由glDrawElements来起启动画图。
@@ -70,8 +70,8 @@ MojoShader
    in/out Blocks , varying 的属性是传在这里了 ,
 
 
-+ 如何实时动态编译与链接与加载与调用
-=====================================================
+ 如何实时动态编译与链接与加载与调用
+===================================
 
      <img src="%ATTACHURLPATH%/shadeCompilation.png" alt="shadeCompilation.png" width='661' height='573' />
 #. shaderObject 应该类似于obj文件。也就是表示代码是可以复用了。
@@ -95,8 +95,8 @@ MojoShader
    glUseProgram ,把GLSL 加载当前的pipeline中,
    glGenProgramPipeLines/Bind/Delete, glUseProgramStages， glactiveShaderProgram,glProgramUniformMatrix* , 
 
-+ shader语言本身复用机制是什么，是不是也象C语言一样，有健全的机制，也还是部分机制。以及调试问题
-==========================================================================================================================================
+shader语言本身复用机制是什么，是不是也象C语言一样，有健全的机制，也还是部分机制。以及调试问题
+=============================================================================================
 
 opengl并不支持文件系统，所以也就不能支持#include.  它自己内部的虚拟文件系统是非常简单的。解决的方案，等待新版的支持，利用m4等模板技术来实现。提前准备好一个大文件。
 #. `how-to-write-reusable-glsl-code <http://stackoverflow.com/questions/13530146/how-to-write-reusable-glsl-code>`_ 
@@ -117,8 +117,9 @@ Type
 
 vec 最高不超过四维，如果是坐标那就是(x,y,z,w),如果是颜色v那就是（r,g,b,a),如果纹理坐标那就是(s,t,p,q).
 当然对于这些变量类型的操作都会有简单的操作方式,它们之间不能混用，
+
 函数参数
-============
+========
 
 
 .. csv-table:: 
@@ -146,8 +147,10 @@ vec 最高不超过四维，如果是坐标那就是(x,y,z,w),如果是颜色v�
 #. start Graphic debug
 #. Pause and Capture Frame
 #. open shader list,debug and edit
-   #. it use the nvtx to record the draw call and then replay.
-%T% change TDR, 打开Nsight monitor,然后右键点属性修改TDR为60s,不然，windows 会认为显卡长时间没有反应reload显卡driver.
+#. it use the nvtx to record the draw call and then replay.
+
+.. note:: change TDR, 打开Nsight monitor,然后右键点属性修改TDR为60s,不然，windows 会认为显卡长时间没有反应reload显卡driver.
+
 See also
 ========
 
@@ -187,7 +190,7 @@ GLSL不能保证同样的代码在在不同的shader能得到的相同值，这�
 -- Main.GangweiLi - 26 Aug 2013
 
 
-*`OpenGl read and write to the same texture <http://stackoverflow.com/questions/11410292/opengl-read-and-write-to-the-same-texture>`_ *  opengl 的规范中是不保证这种情况的，因为GPU在读写的时候有缓存机制。可以使用渲染到纹理，然后通过两部实现。或者利用`NVIDIA的扩展 <http://www.opengl.org/registry/specs/NV/texture_barrier.txt>`_  或者直接使用CUDA 就不会有这个问题。
+`OpenGl read and write to the same texture <http://stackoverflow.com/questions/11410292/opengl-read-and-write-to-the-same-texture>`_   opengl 的规范中是不保证这种情况的，因为GPU在读写的时候有缓存机制。可以使用渲染到纹理，然后通过两部实现。或者利用`NVIDIA的扩展 <http://www.opengl.org/registry/specs/NV/texture_barrier.txt>`_  或者直接使用CUDA 就不会有这个问题。
 例如计算直方图一样，就要通过两部，需要一个反复复值的问题。
 
 看来直接shader直接实现直方图还是挺烦的一个事情。用opencv计算速度太慢,简单，例如直方图，利用pixel shader 把亮度本身当做指针，然然后写纹理就不行，例一个办法那是直接实现读取与复值功能。 
@@ -199,6 +202,3 @@ GLSL不能保证同样的代码在在不同的shader能得到的相同值，这�
 采用预编译指令，来解决分枝也是一种办法。
 
 -- Main.GangweiLi - 05 Mar 2014
-
-
--- Main.GangweiLi - 26 Aug 2013
