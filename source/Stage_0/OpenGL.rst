@@ -1,10 +1,3 @@
-:author: GangweiLi
-:comment: No
-:CreateDate: 14-07-10
-:status: C
-:name: Opengl
-:LastModified: |today|
-
 Introduction 
 =============
 
