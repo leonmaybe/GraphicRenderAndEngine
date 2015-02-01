@@ -1,8 +1,6 @@
 ################
-图形的生成与建模
+鍥惧舰鐨勭敓鎴愪笌寤烘ā
 ################
 
 
 
-.. include:: Stage_1/GameEngine.rst
-.. include:: Stage_1/UnrealEngine.rst
