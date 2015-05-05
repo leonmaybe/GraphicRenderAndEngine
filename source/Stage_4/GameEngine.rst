@@ -15,6 +15,7 @@ Introduction
 *GameEngine* 最重要的资源的分配与各个子系统的交互。一个最简单的模型，就是一个全局变量加上一个死循环。当然这种循环不一定非是由应用程序来实现。关键是一个闭环的状态机。对于一个专用机或虚拟机的完全可以使用中断来实现这个闭环的状态机。OS内核就是利用这样的机制来实现。  例如FPS游戏,人与各种武器之间如何交互，虚拟世界中各种物体是如何交互的，并且要尽可能符合现实，当然不必完全一样，但是一定要合理。
 
 *GEA_Architecture.pdf* 笔记就是现在这篇。
+
 常用的工具
 ==========
 主要是 `ConfigurationManagement.rst` 版本控制工具与build以及 `ContinuousIntegration.rst` CI的工具。这些可以参考自己的。
@@ -90,6 +91,7 @@ Graphics and Motion
 
 游戏团队的构成
 ==============
+
    * Engineer
    * Artists  (content is king)
       1. concept artists 策划
@@ -168,6 +170,7 @@ Game Engine Survey
 
 Gameplay 
 ========
+
 随时能够停下来，随时保存还是分段保存，在网络游戏的时候，哪些是需要远程重现的。这些都是要规划的。
 #. `随机数和概率在游戏中的使用 <http://blog.csdn.net/ybhou/article/details/10034153>`_ 装备强化的成功率，副本里装备的掉落率，通关奖励翻牌的掉落率，攻击暴击的概率，攻击MISS的几率，梦幻西游里碰到变异宝宝的概率等等都可以这样实现。 各种系统行为的初始值都可以用随机数来产生。   
 
