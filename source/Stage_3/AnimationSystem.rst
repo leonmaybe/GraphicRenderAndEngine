@@ -1,6 +1,5 @@
 介绍
-======
-
+====
 
 .. graphviz::
 
@@ -23,11 +22,14 @@ skeleton动画又要分为FK，IK,不管怎样最形成树。由keyframe时root 
 
 
 实现
-======
+====
 
 root的参数可以根据keyframe设置好，也可以物理引擎来实时的计算。在blender 中可以graph editor来定义root的运动曲线，然后由blender自动的捕捉keyframe. F 曲线，就是各个参数随时间的曲线。你可以在物体的任意属性点右键，把其插入keyframe,就可用F曲线去控制了。
 
+熟悉的opengl的流程，再看这些这些建模就容易多了，对于骨骼的更新可以CPU来计算，因为是一个树状的更新，当然也可以用CUDA的来实现并行，而对于skin的点的计算则可以用vertex shader 来计算。 而光照的计算可以放在 geometry shader中进行。texture 上去主要在framebuffer这一层,而图形的合成可以放在pbuffer来操作。当然光照也可以放在这里做。 这样就可以充分利用GPU的并行与CPU的串行。在引擎中，这此简单的操作shader都是自动帮你生成的。
+
 对于skin的mapping中在存储数组也可以在blender 交互的产生利用field实现。当然这些能够与shape keys结合起实现肌肉的运动。
+gameworks skinning app 就是在CPU上直接计算 computebones,来直接计算的 bones, 然后直接用vertex shader 来更新mesh的。mesh的基本数据作为静态数据全局数据存放在哪里。实际上就是逐级差分的的过程。
 
 .. csv-table:: 
 
@@ -40,6 +42,7 @@ root的参数可以根据keyframe设置好，也可以物理引擎来实时的�
 另一个难点那就是layer bone的层次的定义。但是它们之间的关系是如何可影响的， 
 关于骨头动画中，骨头的驱动关系，到是底Forward Kinematics, Inverse Kinetics. 这个是不是运动类型来区别呢，例如在武术中原理应该是前向驱动，而一些手本身的动作是后向驱动。IK和FK是组成我们人体运动的两种方式，做绑定的时候这两种运动方式需要配合使用，都需要做，具体的话请去查阅人体动力学的相关知识，从而了解我们身体中的运动哪些行为属于IK，哪些属于FK。  当然这里面有好多免费的动画资源可以利用。
 直接按 Alt+A 可以直接预览动画了。
+
 #. `reallusion <http://www.reallusion.com/about/aboutus.aspx>`_  一个比较前沿的公司。
    关于人体骨骼层次定义可以在makehuman中找到现成的`模板 <http://www.makehuman.org/doc/node/defining_the_target_rig_manually.html>`_  . 就是一个树形结构。root是hips. 就是一个树形结构。所谓的力从腰发。
 
@@ -51,9 +54,8 @@ root的参数可以根据keyframe设置好，也可以物理引擎来实时的�
 #. `Character_Animation/Rigging <http://wiki.blender.org/index.php/Doc:2.4/Tutorials/Animation/BSoD/Character_Animation/Rigging>`_ 
 
 
-
 key frame + 样条插值
-========================
+====================
 
 对于刚体的运动可以用平移+ yaw,pitch,and roll 来实现。  实例见Work.HDRSample,物体位置，可以由运动方程来插值求解，而物体自身的运动也可也可以自身运动方程来解决，因为大部分的运动方程不超过三阶，所以三阶样条可以很好的模拟大部分的运动，`龙格现象 <http://zh.wikipedia.org/wiki/%E9%BE%99%E6%A0%BC%E7%8E%B0%E8%B1%A1>`_ 解析了为什么高阶不适合插值的原因。  自身坐标与全局坐标的变换通过矩阵变换就可以实现了。
 #. `基于虚拟样机的小型仿人机器人步态规划与步行控制研究 <http://www.docin.com/p-687268763.html>`_ 
@@ -71,6 +73,9 @@ Body motion
 
 #. `List_of_motion_and_gesture_file_formats <http://en.wikipedia.org/wiki/List_of_motion_and_gesture_file_formats>`_ 
 #. ` VICON bodybuilder  <http://www.biomech.uottawa.ca/english/teaching/apa6905/lectures/bodybuilder_v1_2.pdf>`_ 
+
+
+
 See also
 ========
 
